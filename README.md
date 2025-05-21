@@ -1,1 +1,0 @@
-items.csv contains the list of item id and name. sales_2023.xlsx and sales_2024.xlsx contain list of items with id and sales details in year 2023 and 2024 respectively. Plot_Merge_datasets.py contains the program to merge the datasets for plotting a stacked bar graph of overall sales data grouped by their names.
