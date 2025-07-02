@@ -1,0 +1,135 @@
+
+	1. open a python interpreter
+python3
+	2. import numpy
+import numpy as np
+	3. create a 1D array having 5 elements (integers) using array method
+a1=np.array([1,2,3,4,5])
+a1
+Out[5]: array([1, 2, 3, 4, 5])
+	4. do 3 using arange  
+a2=np.arange(5)	 
+a2
+Out[6]: array([0, 1, 2, 3, 4])
+	5. create a 3 dimensional array containing 1s(integers), there should be 40 members
+ a3=np.ones((2,4,5))
+In [9]: a3
+Out[9]: 
+array([[[1., 1., 1., 1., 1.],
+        [1., 1., 1., 1., 1.],
+        [1., 1., 1., 1., 1.],
+        [1., 1., 1., 1., 1.]],
+
+       [[1., 1., 1., 1., 1.],
+        [1., 1., 1., 1., 1.],
+        [1., 1., 1., 1., 1.],
+        [1., 1., 1., 1., 1.]]])
+
+
+	6. print the total number of elements (size) for the above array
+In [10]: a3.size
+Out[10]: 40
+	7. Check and explain the difference between array and asarray
+In [11]: l1=[7,8,9]
+
+In [12]: a4=np.array(l1)
+
+In [13]: a44=np.array(a4)
+
+In [14]: a4 is a44
+Out[14]: False
+
+
+In [15]: a5=np.asarray(l1)
+
+In [16]: a55=np.asarray(a5)
+
+In [17]: a5 is a55
+Out[17]: True
+
+np.array(numpyarray) creates a copy of the given numpyarray
+whereas np.asarray(numpyarray) creates just a reference of the given numpyarray
+	8. Create an identity matrix of a given specification.
+ a6=np.identity(5)
+
+In [19]: a6
+Out[19]: 
+array([[1., 0., 0., 0., 0.],
+       [0., 1., 0., 0., 0.],
+       [0., 0., 1., 0., 0.],
+       [0., 0., 0., 1., 0.],
+       [0., 0., 0., 0., 1.]])
+	9. Create an array containing 0s inheriting shape from the arrya created in Q.No.5
+ a7=np.zeros_like(a3)
+
+In [21]: a7
+Out[21]: 
+array([[[0., 0., 0., 0., 0.],
+        [0., 0., 0., 0., 0.],
+        [0., 0., 0., 0., 0.],
+        [0., 0., 0., 0., 0.]],
+
+       [[0., 0., 0., 0., 0.],
+        [0., 0., 0., 0., 0.],
+        [0., 0., 0., 0., 0.],
+        [0., 0., 0., 0., 0.]]])
+
+	10.Print the size,shape,dimensions and datatype of all the above arrays. 
+In [22]: a1.size
+Out[22]: 5
+In [24]: a1.shape
+Out[24]: (5,)
+In [26]: a1.ndim
+Out[26]: 1
+In [27]: a2.size
+Out[27]: 5
+
+In [28]: a2.shape
+Out[28]: (5,)
+
+In [29]: a2.ndim
+Out[29]: 1
+
+In [30]: a3.size
+Out[30]: 40
+
+In [31]: a3.shape
+Out[31]: (2, 4, 5)
+
+In [32]: a3.ndim
+Out[32]: 3
+
+In [33]: a4.size
+Out[33]: 3
+
+In [34]: a4.shape
+Out[34]: (3,)
+
+In [35]: a4.ndim
+Out[35]: 1
+
+In [36]: a5.size
+Out[36]: 3
+
+In [37]: a5.shape
+Out[37]: (3,)
+
+In [38]: a5.ndim
+Out[38]: 1
+In [39]: a6.size
+Out[39]: 25
+
+In [40]: a6.shape
+Out[40]: (5, 5)
+
+In [41]: a6.ndim
+Out[41]: 2
+
+In [42]: a7.size
+Out[42]: 40
+
+In [43]: a7.shape
+Out[43]: (2, 4, 5)
+
+In [44]: a7.ndim
+Out[44]: 3
