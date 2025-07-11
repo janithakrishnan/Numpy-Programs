@@ -1,0 +1,296 @@
+
+#PRACTISING NUMPY ARRAYS
+
+In [4]: import numpy as np
+
+In [5]: a1=np.array([[1,2,3],[4,5,6]])
+
+In [6]: a1
+Out[6]: 
+array([[1, 2, 3],
+       [4, 5, 6]])
+
+In [7]: a1.shape
+Out[7]: (2, 3)
+
+In [8]: a1.size
+Out[8]: 6
+
+In [9]: a1.ndim
+Out[9]: 2
+
+In [10]: a1.dtype
+Out[10]: dtype('int64')
+
+In [11]: type(a1)
+Out[11]: numpy.ndarray
+
+
+#ARRAY CREATION METHODS 
+#asarray
+
+In [15]: a2=np.asarray(a1) #creating array using asarray
+
+In [16]: a2
+Out[16]: 
+array([[1, 2, 3],
+       [4, 5, 6]])
+
+In [17]: a1
+Out[17]: 
+array([[1, 2, 3],
+       [4, 5, 6]])
+
+In [18]: a2==a1  #checking if all elements are equal or not
+Out[18]: 
+array([[ True,  True,  True],
+       [ True,  True,  True]])
+
+In [19]: a2 is a1 #chceking if a2 and a1 are same. a2 ia reference of a1
+Out[19]: True
+
+
+#np.array
+
+In [20]: b1=np.array(a1) #creating array using array
+
+In [21]: b1 is a1 #it is not because b1 is a copy of a1
+Out[21]: False
+
+In [22]: b1==a1 #
+Out[22]: 
+array([[ True,  True,  True],
+       [ True,  True,  True]])
+
+
+In [25]: a1[0][0]=-99
+
+In [26]: a1 #a1 changed
+Out[26]: 
+array([[-99,   2,   3],
+       [  4,   5,   6]])
+
+In [27]: a2 # a2 changed as a1 changed
+Out[27]: 
+array([[-99,   2,   3],
+       [  4,   5,   6]])
+
+In [28]: b1 #no change in b1
+Out[28]: 
+array([[1, 2, 3],
+       [4, 5, 6]])
+
+
+#USING .copy()
+In [31]: l1=a1.copy()
+
+In [32]: l1
+Out[32]: 
+array([[-99,   2,   3],
+       [  4,   5,   6]])
+
+In [33]: a1[0][0]=1000
+
+In [34]: a1
+Out[34]: 
+array([[1000,    2,    3],
+       [   4,    5,    6]])
+
+In [35]: l1
+Out[35]: 
+array([[-99,   2,   3],
+       [  4,   5,   6]])
+
+#DEEP COPY AND SHALLOW COPY
+
+In [36]: c1=[1,2,3,[4,5,6]]
+
+In [37]: c2=c1.copy() #C2 IS SHALLOW COPY OF C1
+
+In [38]: c2
+Out[38]: [1, 2, 3, [4, 5, 6]]
+
+
+In [41]: c1[0]=-99
+
+In [42]: c1
+Out[42]: [-99, 2, 3, [4, 5, 6]]
+
+In [43]: c2
+Out[43]: [1, 2, 3, [4, 5, 6]] #no change in copy
+
+In [44]: c1[3][0]=-888
+
+In [45]: c1
+Out[45]: [-99, 2, 3, [-888, 5, 6]]
+
+In [46]: c2
+Out[46]: [1, 2, 3, [-888, 5, 6]] #no change in 1st level but 2nd level changed
+
+#DEEP COPY
+In [47]: import copy
+
+In [48]: c1=[1,2,3,[4,5,6]]
+
+In [49]: c3=copy.deepcopy(c1)
+
+In [50]: c1
+Out[50]: [1, 2, 3, [4, 5, 6]]
+
+In [51]: c3
+Out[51]: [1, 2, 3, [4, 5, 6]]
+
+In [52]: c1[3][0]=1000
+
+In [53]: c1
+Out[53]: [1, 2, 3, [1000, 5, 6]]
+
+In [54]: c3
+Out[54]: [1, 2, 3, [4, 5, 6]] #no change in c3
+
+
+#np.arange
+In [55]: ar1=np.arange(10)
+
+In [56]: ar1
+Out[56]: array([0, 1, 2, 3, 4, 5, 6, 7, 8, 9])
+
+In [57]: ar2=np.arange(1,10,2)
+
+In [58]: ar2
+Out[58]: array([1, 3, 5, 7, 9])
+
+
+#np.zeros()
+In [59]: z1=np.zeros(10)
+
+In [60]: z1
+Out[60]: array([0., 0., 0., 0., 0., 0., 0., 0., 0., 0.])
+
+In [61]: z2=np.zeros((2,3))
+
+In [62]: z2
+Out[62]: 
+array([[0., 0., 0.],
+       [0., 0., 0.]])
+
+#np.ones()
+In [65]: o2=np.ones((3,4))
+
+In [66]: o2
+Out[66]: 
+array([[1., 1., 1., 1.],
+       [1., 1., 1., 1.],
+       [1., 1., 1., 1.]])
+
+In [67]: o1=np.ones(10)
+
+In [68]: o1
+Out[68]: array([1., 1., 1., 1., 1., 1., 1., 1., 1., 1.])
+
+In [69]: o2=np.ones((3,4))
+
+In [70]: o2
+Out[70]: 
+array([[1., 1., 1., 1.],
+       [1., 1., 1., 1.],
+       [1., 1., 1., 1.]])
+
+
+#np.zeros_like()
+In [71]: a1
+Out[71]: 
+array([[1000,    2,    3],
+       [   4,    5,    6]])
+
+In [72]: za1=np.zeros_like(a1)
+
+In [73]: za1
+Out[73]: 
+array([[0, 0, 0],
+       [0, 0, 0]])
+
+
+#np.ones_like()
+In [74]: a1
+Out[74]: 
+array([[1000,    2,    3],
+       [   4,    5,    6]])
+
+In [75]: oa1=np.ones_like(a1)
+
+In [76]: oa1
+Out[76]: 
+array([[1, 1, 1],
+       [1, 1, 1]])
+
+#np.empty()
+In [79]: e1=np.empty(10)
+
+In [80]: e1
+Out[80]: array([1., 1., 1., 1., 1., 1., 1., 1., 1., 1.])
+
+In [81]: e2=np.empty((3,4))
+
+In [82]: e2
+Out[82]: 
+array([[1., 1., 1., 1.],
+       [1., 1., 1., 1.],
+       [1., 1., 1., 1.]])
+
+In [83]: e2=np.empty((2,3))
+
+In [84]: e2
+Out[84]: 
+array([[2.35825043e-316, 0.00000000e+000, 0.00000000e+000],
+       [0.00000000e+000, 0.00000000e+000, 0.00000000e+000]])
+
+#np.empty_like()
+In [85]: a1
+Out[85]: 
+array([[1000,    2,    3],
+       [   4,    5,    6]])
+
+In [86]: ea1=np.empty_like(a1)
+
+In [87]: ea1
+Out[87]: 
+array([[47731520,        0,        0],
+       [       0,        0,        0]])
+
+#np.identity() and np.eye()
+In [88]: i1=np.eye(3)
+
+In [89]: i1
+Out[89]: 
+array([[1., 0., 0.],
+       [0., 1., 0.],
+       [0., 0., 1.]])
+
+In [90]: i2=np.identity(3)
+
+In [91]: i2
+Out[91]: 
+array([[1., 0., 0.],
+       [0., 1., 0.],
+       [0., 0., 1.]])
+       
+
+
+#np.full()
+In [93]: f1=np.full((2,3),100)
+
+In [94]: f1
+Out[94]: 
+array([[100, 100, 100],
+       [100, 100, 100]])
+
+In [95]: f2=np.full((3,4),46)
+
+In [96]: f2
+Out[96]: 
+array([[46, 46, 46, 46],
+       [46, 46, 46, 46],
+       [46, 46, 46, 46]])
+
+ 
