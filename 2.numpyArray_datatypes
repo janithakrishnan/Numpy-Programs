@@ -1,0 +1,236 @@
+#1. INTEGER VARIANTS --> i1,i2,i4,i8
+
+In [101]: a1=np.array([1,2,3])
+
+In [102]: a1.dtype
+Out[102]: dtype('int64')
+
+In [103]: a1=np.array([1,2,3],dtype='int8')
+
+In [104]: a1.dtype
+Out[104]: dtype('int8')
+
+In [105]: a1=np.array([1,2,3],dtype='i1')
+
+In [106]: a1.dtype
+Out[106]: dtype('int8')
+
+In [107]: a1=np.array([1,2,3],dtype=np.int8)
+
+In [108]: a1.dtype
+Out[108]: dtype('int8')
+
+In [109]: a1=np.array([1,2,3],dtype='i2')
+
+In [110]: a1.dtype
+Out[110]: dtype('int16')
+
+In [111]: a1=np.array([1,2,3],dtype='i4')
+
+In [112]: a1.dtype
+Out[112]: dtype('int32')
+
+In [113]: a1=np.array([1,2,3],dtype='i8')
+
+In [114]: a1.dtype
+Out[114]: dtype('int64')
+
+
+
+In [115]: a1=np.array([1,2,-128],dtype='i1')
+
+In [116]: a1
+Out[116]: array([   1,    2, -128], dtype=int8)
+
+In [117]: a1=np.array([1,2,-129],dtype='i1')
+
+In [118]: a1
+Out[118]: array([  1,   2, 127], dtype=int8) #i1/int8 can store values from -128 to 127 only
+
+
+
+
+#2 UNSIGNED INT VARIANTS--> u1,u2,u4,u8
+
+In [119]: a1=np.array([1,2,-129],dtype='u1')
+
+In [120]: a1
+Out[120]: array([  1,   2, 127], dtype=uint8)
+
+In [121]: a1=np.array([1,2,255],dtype='u1')
+
+In [122]: a1
+Out[122]: array([  1,   2, 255], dtype=uint8) #u1/uint8 ca store from 0 to 255 values
+
+In [123]: a1=np.array([1,2,3],dtype='u2')
+
+In [124]: a1
+Out[124]: array([1, 2, 3], dtype=uint16)
+
+In [125]: a1=np.array([1,2,3],dtype='u4')
+
+In [126]: a1
+Out[126]: array([1, 2, 3], dtype=uint32)
+
+In [127]: a1=np.array([1,2,3],dtype='u8')
+
+In [128]: a1
+Out[128]: array([1, 2, 3], dtype=uint64)
+
+
+#3 FLOATING POINT VARIANTS--> f2,f4,f8,f16
+
+In [129]: a1=np.array([1,2,3],dtype='f2')
+
+In [130]: a1
+Out[130]: array([1., 2., 3.], dtype=float16)
+
+In [131]: a1=np.array([1,2,3],dtype='f4')
+
+In [132]: a1
+Out[132]: array([1., 2., 3.], dtype=float32)
+
+In [133]: a1=np.array([1,2,3],dtype='f8')
+
+In [134]: a1
+Out[134]: array([1., 2., 3.])
+
+In [135]: a1=np.array([1,2,3],dtype='f8')
+
+In [136]: a1
+Out[136]: array([1., 2., 3.])
+
+In [137]: a1.dtype
+Out[137]: dtype('float64')
+
+In [138]: a1=np.array([1,2,3],dtype='f16')
+
+In [139]: a1
+Out[139]: array([1., 2., 3.], dtype=float128)
+
+
+#4.COMPLEX NUMBERS -->c8,c16,c32
+
+In [148]: c=complex(3,4)
+
+In [149]: c
+Out[149]: (3+4j)
+
+In [150]: c1=np.array([c,c+3],dtype='c8')
+
+In [151]: c1
+Out[151]: array([3.+4.j, 6.+4.j], dtype=complex64)
+
+In [152]: c1=np.array([c,c+3],dtype='c16')
+
+In [153]: c1
+Out[153]: array([3.+4.j, 6.+4.j])
+
+In [154]: c1=np.array([c,c+3],dtype='c32')
+
+In [155]: c1
+Out[155]: array([3.+4.j, 6.+4.j], dtype=complex256)
+
+In [156]: c1=np.array([c,c+3],dtype='c16')
+
+In [157]: c1
+Out[157]: array([3.+4.j, 6.+4.j])
+
+In [158]: c1.dtype
+Out[158]: dtype('complex128')
+
+
+# 5. BOOLEAN --> ?
+In [159]: a1=np.array([1,0,2,0,3],dtype='?')
+
+In [160]: a1
+Out[160]: array([ True, False,  True, False,  True])
+
+In [161]: a1.dtype
+Out[161]: dtype('bool')
+
+#6. STRING
+
+In [162]: s1=np.array("one two three".split())
+
+In [163]: s1
+Out[163]: array(['one', 'two', 'three'], dtype='<U5')
+
+In [166]: s1
+Out[166]: array([b'one', b'two', b'three'], dtype='|S5') #5 in S5 denotes the number of bytes needed to store this array. Here maximum length is 5 for "three" therefore S5
+
+#7.PYTHON OBJECT
+
+In [167]: d1=dict(apple=10,orange=30,grapes=15)
+
+In [168]: d2=dict(a=10,b=30,c=15,d=20)
+
+In [169]: o1=np.array([d1,d2])
+
+In [170]: o1
+Out[170]: 
+array([{'apple': 10, 'orange': 30, 'grapes': 15},
+       {'a': 10, 'b': 30, 'c': 15, 'd': 20}], dtype=object)
+
+In [171]: o1=np.array([1,2,3],dtype='O')
+
+In [172]: o1
+Out[172]: array([1, 2, 3], dtype=object)
+
+
+#8.DATE-TIME
+In [173]: t1=np.datetime64('2025-01-01')
+
+In [174]: t1
+Out[174]: numpy.datetime64('2025-01-01')
+
+In [175]: t1+1
+Out[175]: numpy.datetime64('2025-01-02')
+
+In [176]: tt1=np.array([t1,t1+1])
+
+In [177]: tt1
+Out[177]: array(['2025-01-01', '2025-01-02'], dtype='datetime64[D]')
+
+In [178]: tt1.dtype
+Out[178]: dtype('<M8[D]')
+
+In [180]: t3=np.datetime64('2025-01-01','M')
+
+In [181]: t3
+Out[181]: numpy.datetime64('2025-01')
+
+In [182]: t3.dtype
+Out[182]: dtype('<M8[M]')
+
+In [183]: t3+1
+Out[183]: numpy.datetime64('2025-02')
+
+In [184]: t4=t3+1
+
+In [185]: t4
+Out[185]: numpy.datetime64('2025-02')
+
+
+#9. TIME DELTA
+In [186]: t4-t3
+Out[186]: numpy.timedelta64(1,'M')
+
+
+
+#CHANGING DATA TYPE
+
+In [189]: a1=np.array([1,0,2,0,3],dtype=object)
+
+In [190]: a1
+Out[190]: array([1, 0, 2, 0, 3], dtype=object)
+
+In [191]: a2=a1.astype('i8')
+
+In [192]: a2
+Out[192]: array([1, 0, 2, 0, 3])
+
+In [193]: a2.dtype
+Out[193]: dtype('int64')
+
+
