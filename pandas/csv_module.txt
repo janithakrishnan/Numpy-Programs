@@ -1,0 +1,217 @@
+#######################
+CSV MODULE
+#######################
+#Importing csv
+
+In [36]: import csv
+
+#Reading a file
+
+In [37]: f1=open('stud.csv')
+
+In [38]: cr=csv.reader(f1)
+
+In [39]: cr
+Out[39]: <_csv.reader at 0x1cbccec4940>
+
+In [40]: for r in cr:
+    ...:     print(r)
+    ...:
+['sname', 'sub', 'score']
+['tom', 'sci', '56']
+['tom', 'lan', '87']
+['tom', 'mat', '98']
+['raj', 'sci', '80']
+['raj', 'lan', '83']
+['raj', 'mat', '90']
+['roy', 'sci', '77']
+['roy', 'lan', '67']
+['roy', 'mat', '89']
+
+#Reading again gives no output
+In [41]: cr=csv.reader(f1)
+
+In [42]: list(cr)
+Out[42]: []
+
+
+#Reading again after creating new file handle
+
+In [43]: f1=open('stud.csv')
+
+In [44]: cr=csv.reader(f1)
+
+In [45]: list(cr)
+Out[45]:
+[['sname', 'sub', 'score'],
+ ['tom', 'sci', '56'],
+ ['tom', 'lan', '87'],
+ ['tom', 'mat', '98'],
+ ['raj', 'sci', '80'],
+ ['raj', 'lan', '83'],
+ ['raj', 'mat', '90'],
+ ['roy', 'sci', '77'],
+ ['roy', 'lan', '67'],
+ ['roy', 'mat', '89']]
+
+#Dictionary Reader
+In [46]: f1=open('stud.csv')
+
+In [47]: dcr=csv.DictReader(f1)
+
+In [48]: for r in dcr:
+    ...:     print(r)
+    ...:
+{'sname': 'tom', 'sub': 'sci', 'score': '56'}
+{'sname': 'tom', 'sub': 'lan', 'score': '87'}
+{'sname': 'tom', 'sub': 'mat', 'score': '98'}
+{'sname': 'raj', 'sub': 'sci', 'score': '80'}
+{'sname': 'raj', 'sub': 'lan', 'score': '83'}
+{'sname': 'raj', 'sub': 'mat', 'score': '90'}
+{'sname': 'roy', 'sub': 'sci', 'score': '77'}
+{'sname': 'roy', 'sub': 'lan', 'score': '67'}
+{'sname': 'roy', 'sub': 'mat', 'score': '89'}
+
+###########
+#Writing to a file
+############
+#Read existing file to a list
+In [58]: fo=open('stud.csv')
+
+In [59]: cr=csv.reader(fo)
+
+In [60]: lr=list(cr)
+
+In [61]: lr
+Out[61]:
+[['sname', 'sub', 'score'],
+ ['tom', 'sci', '56'],
+ ['tom', 'lan', '87'],
+ ['tom', 'mat', '97'],
+ ['raj', 'sci', '70'],
+ ['raj', 'lan', '84'],
+ ['raj', 'mat', '76'],
+ ['roy', 'sci', '67'],
+ ['roy', 'lan', '98'],
+ ['roy', 'mat', '88']]
+
+#Write list to a file
+
+
+In [69]: fw=open('stud_new.csv','w')
+
+In [70]: cw=csv.writer(fw)
+
+In [71]: cw.writerows(lr)
+
+In [72]: fw.close()
+
+#Reading from new file (newline is added after each line)
+In [73]: fo=open('stud_new.csv')
+
+In [74]: cr=csv.reader(fo)
+
+In [75]: for r in cr:
+    ...:     print(r)
+    ...:
+['sname', 'sub', 'score']
+[]
+['tom', 'sci', '56']
+[]
+['tom', 'lan', '87']
+[]
+['tom', 'mat', '97']
+[]
+['raj', 'sci', '70']
+[]
+['raj', 'lan', '84']
+[]
+['raj', 'mat', '76']
+[]
+['roy', 'sci', '67']
+[]
+['roy', 'lan', '98']
+[]
+['roy', 'mat', '88']
+[]
+
+
+#####################
+DIALECT
+####################
+#Creating user Dialect
+
+
+In [77]: class newD(csv.Dialect):
+    ...:     delimiter=';'
+    ...:     quotechar='^'
+    ...:     lineterminator='\n'
+    ...:     quoting=csv.QUOTE_ALL
+
+
+#Writing a new file with dialect newD from the existing file
+In [78]: fw=open('stud_newDialect.csv','w')
+
+In [79]: cw=csv.writer(fw)
+
+In [80]: fw=open('stud_newDialect.csv','w')
+
+In [81]: cw=csv.writer(fw,dialect=newD())
+
+In [82]: cw.writerows(lr)
+
+In [83]: fw.close()
+
+
+
+cat stud_newDialect.csv
+
+^sname^;^sub^;^score^
+^tom^;^sci^;^56^
+^tom^;^lan^;^87^
+^tom^;^mat^;^97^
+^raj^;^sci^;^70^
+^raj^;^lan^;^84^
+^raj^;^mat^;^76^
+^roy^;^sci^;^67^
+^roy^;^lan^;^98^
+^roy^;^mat^;^88^
+
+
+
+#Reading from file with new Dialect
+
+In [84]: fo=open('stud_newDialect.csv')
+
+In [85]: cr=csv.reader(fo) #Reading without specifying dialect
+
+In [86]: list(cr)
+Out[86]:
+[['^sname^;^sub^;^score^'],
+ ['^tom^;^sci^;^56^'],
+ ['^tom^;^lan^;^87^'],
+ ['^tom^;^mat^;^97^'],
+ ['^raj^;^sci^;^70^'],
+ ['^raj^;^lan^;^84^'],
+ ['^raj^;^mat^;^76^'],
+ ['^roy^;^sci^;^67^'],
+ ['^roy^;^lan^;^98^'],
+ ['^roy^;^mat^;^88^']]
+
+In [87]: fo=open('stud_newDialect.csv')
+
+In [88]: cr=csv.reader(fo,dialect=newD()) #specifying dialect
+
+In [89]: list(cr)
+Out[89]:
+[['sname', 'sub', 'score'],
+ ['tom', 'sci', '56'],
+ ['tom', 'lan', '87'],
+ ['tom', 'mat', '97'],
+ ['raj', 'sci', '70'],
+ ['raj', 'lan', '84'],
+ ['raj', 'mat', '76'],
+ ['roy', 'sci', '67'],
+ ['roy', 'lan', '98'],
+ ['roy', 'mat', '88']]
+

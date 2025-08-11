@@ -1,0 +1,136 @@
+
+In [16]: sf1=f([r[:-1].split(',') for r in open('stud.csv').readlines()[1:]],columns='sname sub score'.split())
+
+In [17]: sf1
+Out[17]:
+  sname  sub score
+0   tom  sci    56
+1   tom  lan    87
+2   tom  mat    98
+3   raj  sci    80
+4   raj  lan    83
+5   raj  mat    90
+6   roy  sci    77
+7   roy  lan    67
+8   roy  mat     8
+
+
+
+In [19]: sf1['rol']=np.nan
+
+In [20]: sf1
+Out[20]:
+  sname  sub score  rol
+0   tom  sci    56  NaN
+1   tom  lan    87  NaN
+2   tom  mat    98  NaN
+3   raj  sci    80  NaN
+4   raj  lan    83  NaN
+5   raj  mat    90  NaN
+6   roy  sci    77  NaN
+7   roy  lan    67  NaN
+8   roy  mat     8  NaN
+
+In [21]: sf1['rol']=range(101,110)
+
+In [22]: sf1
+Out[22]:
+  sname  sub score  rol
+0   tom  sci    56  101
+1   tom  lan    87  102
+2   tom  mat    98  103
+3   raj  sci    80  104
+4   raj  lan    83  105
+5   raj  mat    90  106
+6   roy  sci    77  107
+7   roy  lan    67  108
+8   roy  mat     8  109
+
+
+
+In [26]: sf1=sf1.drop(columns='rol')
+
+In [27]: sf1
+Out[27]:
+  sname  sub score
+0   tom  sci    56
+1   tom  lan    87
+2   tom  mat    98
+3   raj  sci    80
+4   raj  lan    83
+5   raj  mat    90
+6   roy  sci    77
+7   roy  lan    67
+8   roy  mat     8
+
+In [28]: type(sf1)
+Out[28]: pandas.core.frame.DataFrame
+
+
+
+In [30]: sf2=sf1.set_index(['sname','sub'])
+
+In [31]: sf2
+Out[31]:
+          score
+sname sub
+tom   sci    56
+      lan    87
+      mat    98
+raj   sci    80
+      lan    83
+      mat    90
+roy   sci    77
+      lan    67
+      mat     8
+
+In [32]: sf2.loc['tom']
+Out[32]:
+    score
+sub
+sci    56
+lan    87
+mat    98
+
+In [33]: sf2.swaplevel(0,1)
+Out[33]:
+          score
+sub sname
+sci tom      56
+lan tom      87
+mat tom      98
+sci raj      80
+lan raj      83
+mat raj      90
+sci roy      77
+lan roy      67
+mat roy       8
+
+In [34]: sf2.swaplevel('sname','sub')
+Out[34]:
+          score
+sub sname
+sci tom      56
+lan tom      87
+mat tom      98
+sci raj      80
+lan raj      83
+mat raj      90
+sci roy      77
+lan roy      67
+mat roy       8
+
+In [35]: sf2.reset_index()
+Out[35]:
+  sname  sub score
+0   tom  sci    56
+1   tom  lan    87
+2   tom  mat    98
+3   raj  sci    80
+4   raj  lan    83
+5   raj  mat    90
+6   roy  sci    77
+7   roy  lan    67
+8   roy  mat     8
+
+
