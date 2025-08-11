@@ -1,0 +1,164 @@
+#READING A CSV FILE
+
+In [92]: ef=pd.read_csv('emp1.csv')
+
+In [93]: ef
+Out[93]:
+   eno ename25    edesign  esalary25
+0  101     tom  asst engr      20000
+1  102     raj    sr engr      30000
+2  103     roy      clerk       9000
+3  104   peter    officer      15000
+4  105    john  asst engr      25000
+5  106    mary  asst engr      20000
+6  107     ann    sr engr      40000
+7  108   priya      clerk       9000
+
+
+#EXTRACTING FEW COLUMNS ONLY
+In [95]: ef1=pd.read_csv('emp1.csv',usecols=['eno','esalary25'])
+
+In [96]: ef1
+Out[96]:
+   eno  esalary25
+0  101      20000
+1  102      30000
+2  103       9000
+3  104      15000
+4  105      25000
+5  106      20000
+6  107      40000
+7  108       9000
+
+#COLUMN INDEXING
+In [100]: sf1=pd.read_csv('stud.csv',index_col='sname')
+
+In [101]: sf1
+Out[101]:
+       sub  score
+sname
+tom    sci     56
+tom    lan     87
+tom    mat     97
+raj    sci     70
+raj    lan     84
+raj    mat     76
+roy    sci     67
+roy    lan     98
+roy    mat     88
+
+#MULTILEVEL INDEXING
+
+In [98]: sf1=pd.read_csv('stud.csv',index_col=['sname','sub'])
+
+In [99]: sf1
+Out[99]:
+           score
+sname sub
+tom   sci     56
+      lan     87
+      mat     97
+raj   sci     70
+      lan     84
+      mat     76
+roy   sci     67
+      lan     98
+      mat     88
+
+
+#Printing column names
+
+In [103]: ef=pd.read_csv('emp1.csv')
+
+In [104]: ef.columns
+Out[104]: Index(['eno', 'ename25', 'edesign', 'esalary25'], dtype='object')
+
+
+#Accessing columns ending with 25
+In [106]: ef=pd.read_csv('emp1.csv',usecols=lambda c:c.endswith('25'))
+
+In [107]: ef
+Out[107]:
+  ename25  esalary25
+0     tom      20000
+1     raj      30000
+2     roy       9000
+3   peter      15000
+4    john      25000
+5    mary      20000
+6     ann      40000
+7   priya       9000
+
+
+#Accessing columns with more than 3 vowels
+In [115]: def count_vowels(s):
+     ...:     count=0
+     ...:     for ch in s:
+     ...:         if ch in "aeiouAEIOU":
+     ...:             count+=1
+     ...:     return 1 if count>=3 else 0
+     ...:
+In [120]: ef=pd.read_csv('emp1.csv',usecols=count_vowels)
+
+In [121]: ef
+Out[121]:
+  ename25    edesign  esalary25
+0     tom  asst engr      20000
+1     raj    sr engr      30000
+2     roy      clerk       9000
+3   peter    officer      15000
+4    john  asst engr      25000
+5    mary  asst engr      20000
+6     ann    sr engr      40000
+7   priya      clerk       9000
+
+##
+or using lambda
+##
+In [122]: ef=pd.read_csv('emp1.csv',usecols=lambda col:sum(char in "aeiouAEIOU" for char in col)>=3)
+
+In [123]: ef
+Out[123]:
+  ename25    edesign  esalary25
+0     tom  asst engr      20000
+1     raj    sr engr      30000
+2     roy      clerk       9000
+3   peter    officer      15000
+4    john  asst engr      25000
+5    mary  asst engr      20000
+6     ann    sr engr      40000
+7   priya      clerk       9000
+
+
+#Select columns with exactly 3 characters in their names using a function in usecols.
+
+In [125]: ef=pd.read_csv('emp1.csv',usecols=lambda col:len(col)==3)
+
+In [126]: ef
+Out[126]:
+   eno
+0  101
+1  102
+2  103
+3  104
+4  105
+5  106
+6  107
+7  108
+
+#Select columns whose names contain more consonants than vowels.
+
+In [132]: ef=pd.read_csv('emp1.csv',usecols=lambda col:sum(char.lower() in "aeiou" for char in col)<sum(char.lower()
+        ⋮ not in "aeiou" for char in col if char.isalpha()))
+
+In [133]: ef
+Out[133]:
+     edesign  esalary25
+0  asst engr      20000
+1    sr engr      30000
+2      clerk       9000
+3    officer      15000
+4  asst engr      25000
+5  asst engr      20000
+6    sr engr      40000
+7      clerk       9000
