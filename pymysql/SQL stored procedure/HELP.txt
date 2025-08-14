@@ -1,0 +1,12 @@
+1_csvtosql.py
+INSERTING CONTENTS OF CSV FILE studsm.csv TO NEW SQL TABLE studsm
+
+
+
+2_cscore_proc.py
+CREATING STORED PROCEDURE 'cscore' FOR CALCULATING CSCORE OF STUDENT FROM SQL TABLE studsm
+#Constraint: if score of retrieved semester<50 then cscore=0
+
+
+3_calc_cscore.py
+CREATING SQL TABLE FOR STORING RESULTS OF PROCEDURE 'cscore'
